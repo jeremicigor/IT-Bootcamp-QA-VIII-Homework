@@ -1,0 +1,1 @@
+I won a contest in class, and as a result, I am exempt from this homework.

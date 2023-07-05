@@ -1,0 +1,89 @@
+package domaci21_2.pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class SignUpPage extends BasePage {
+
+    @FindBy(name = "name")
+    WebElement nameField;
+    @FindBy(name = "email")
+    WebElement emailField;
+    @FindBy (name = "password")
+    WebElement passwordField;
+    @FindBy (name = "confirmPassword")
+    WebElement confirmPasswordField;
+    @FindBy (xpath = "//button[@type ='submit']")
+    WebElement signMeUpBtn;
+    @FindBy (xpath = "//div[text()='This field must have no less than 5 characters']")
+    WebElement tooShortPassErrorMsg;
+
+
+    public SignUpPage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
+        PageFactory.initElements(getDriver(), this);
+    }
+
+    public WebElement getNameField() {
+        this.nameField = getDriver().findElement(By.id("name"));
+        return nameField;
+    }
+
+    public WebElement getEmailField() {
+        this.emailField = getDriver().findElement(By.id("email"));
+        return emailField;
+    }
+
+    public WebElement getPasswordField() {
+        this.passwordField = getDriver().findElement(By.id("password"));
+        return passwordField;
+    }
+
+    public WebElement getConfirmPasswordField() {
+        this.confirmPasswordField = getDriver().findElement(By.id("confirmPassword"));
+        return confirmPasswordField;
+    }
+
+    public WebElement getSignMeUpBtn() {
+        this.signMeUpBtn = getDriver().findElement(By.xpath("//button[@type ='submit']"));
+        return signMeUpBtn;
+    }
+
+    public WebElement getTooShortPassErrorMsg() {
+        this.tooShortPassErrorMsg = getDriver().findElement(By.xpath("//div[text()='This field must have no less than 5 characters']"));
+        return tooShortPassErrorMsg;
+    }
+
+    public void enterDataToNameField(String text) {
+        nameField.sendKeys(text);
+    }
+
+    public void enterDataToEmailField(String text) {
+        emailField.sendKeys(text);
+    }
+
+    public void enterDataToPasswordField(String text) {
+        passwordField.sendKeys(text);
+    }
+
+    public void enterDataToConfirmPasswordField(String text) {
+        confirmPasswordField.sendKeys(text);
+    }
+
+    public void clickSignMeUpBtn() {
+        signMeUpBtn.click();
+    }
+
+    public void waitForTooShortPassErrorMsg() {
+        getWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='This field must have no less than 5 characters']")));
+    }
+
+    public void open() {
+        getDriver().get("https://vue-demo.daniel-avellaneda.com/signup");
+    }
+}
